@@ -1,6 +1,6 @@
 package com.sacc.Controller;
 
-import com.sacc.Repository.Register;
+import com.sacc.Repository.RegisterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 
 public class RegisterController {
     @Autowired
-     Register reg;
+    RegisterRepository reg;
 
 
     @PostMapping("/api/register")
@@ -31,5 +31,9 @@ public class RegisterController {
         httpSession.setMaxInactiveInterval(60*60);
         return "注册成功";
     }
-
+    
+    @PostMapping("/verify_code")
+    public String verifyCode(String code){
+        return "成功！";
+    }
 }

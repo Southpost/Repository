@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
  * @author 追梦
  */
 @Component
-public class Register {
+public class RegisterRepository {
     @Autowired
     private MongoTemplate mongo;
 
@@ -25,14 +25,14 @@ public class Register {
 //    }
 
 
-    public List<Register> hasRegister(String username) {
+    public List<RegisterRepository> hasRegister(String username) {
         Query query = new Query(Criteria.where("userName").is(username));
-        return mongo.find(query, Register.class);
+        return mongo.find(query, RegisterRepository.class);
     }
 
     public void register(String studentNumber, String userName, String email) {
         Query query = new Query(Criteria.where("userName").is(userName));
-        Register result = (Register) mongo.find(query, Register.class);
+        RegisterRepository result = (RegisterRepository) mongo.find(query, RegisterRepository.class);
         if (result != null) {
             return;
         }
