@@ -1,6 +1,6 @@
-package com.acss.Repository;
+package com.sacc.Repository;
 
-import com.acss.Model.RegisterModel;
+import com.sacc.Model.RegisterModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
