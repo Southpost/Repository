@@ -1,12 +1,17 @@
 package com.sacc.Model;
 
 
+import com.mongodb.lang.NonNull;
+
 /**
  * @author shilei
  */
 public class RegisterModel {
+    @NonNull
     private String studentNumber;
+    @NonNull
     private String name;
+    @NonNull
     private String email;
 
     public String getStudentNumber() {
