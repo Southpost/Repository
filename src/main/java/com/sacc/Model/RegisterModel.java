@@ -17,7 +17,6 @@ public class RegisterModel {
     public String getStudentNumber() {
         return studentNumber;
     }
-
     public void setStudentNumber(String studentNumber) {
         this.studentNumber = studentNumber;
     }
@@ -25,7 +24,6 @@ public class RegisterModel {
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -33,7 +31,6 @@ public class RegisterModel {
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
