@@ -17,9 +17,10 @@ public class RegisterController {
 
 
     @PostMapping("/api/register")
-    public String register(String studentNumber, String name, String email, HttpServletRequest request){
+    public String register(String name, String number, String email,int phone,String major,HttpServletRequest request){
 
-        if(!StringUtils.hasText(studentNumber)||!StringUtils.hasText(name)||!StringUtils.hasText(email)) {
+        if(!StringUtils.hasText(String.valueOf(phone))||!StringUtils.hasText(name)
+                ||!StringUtils.hasText(email)||StringUtils.hasText(major)||StringUtils.hasText(number)) {
             return "请将信息填写完整";
         }
 //       if(reg.hasRegister(name)) {
@@ -29,7 +30,7 @@ public class RegisterController {
             return "不合法邮箱";
         }
 
-        reg.register(studentNumber,name,email);
+        reg.register(number,name,email,phone,major);
         HttpSession httpSession=request.getSession();
         httpSession.setMaxInactiveInterval(60*60);
         return "注册成功";
@@ -46,7 +47,7 @@ public class RegisterController {
     public String verifyCode(@RequestParam(value = "email",defaultValue = "",required = true) String email,
                              HttpServletRequest request){
         try{
-            String code=RandomTools.Randomcode();
+            String code=RandomTools.randomcode();
             request.getSession().setAttribute("registerCode",code);
             Logger log = null;
             assert false;
@@ -62,7 +63,7 @@ public class RegisterController {
 
 
     public static class RandomTools{
-        static String Randomcode(){
+        static String randomcode(){
             char [] codeSequence = {'A','B','C','D','E','F','G','0','1','2','3','4','5','6','7','8','9'};
             //动态字符串
             StringBuilder sb = new StringBuilder();

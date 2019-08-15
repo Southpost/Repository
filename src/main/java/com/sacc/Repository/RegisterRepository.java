@@ -20,21 +20,25 @@ import java.util.regex.Pattern;
  */
 @Component
 public class RegisterRepository {
+    private final Object NormalTools;
     @Autowired
     private MongoTemplate mongo;
     @Autowired
     private JavaMailSenderImpl javaMailSender;
 
 
-    private Object NormalTools;
+    private Object normalTools;
 
+    public RegisterRepository(Object normalTools) {
+        NormalTools = normalTools;
+    }
 
     public List<RegisterRepository> hasRegister(String username) {
         Query query = new Query(Criteria.where("userName").is(username));
         return mongo.find(query, RegisterRepository.class);
     }
 
-    public void register(String studentNumber, String userName, String email) {
+    public void register(String userName, String number,String email, int phone, String major) {
         Query query = new Query(Criteria.where("userName").is(userName));
         RegisterRepository result = (RegisterRepository) mongo.find(query, RegisterRepository.class);
         if (result != null) {
@@ -43,9 +47,11 @@ public class RegisterRepository {
 
         RegisterModel register = new RegisterModel();
         try {
-            register.setStudentNumber(studentNumber);
+            register.setNumber(number);
             register.setEmail(email);
             register.setName(userName);
+            register.setPhone(phone);
+            register.setMajor(major);
             mongo.insert(register);
         } catch (Exception e) {
             e.printStackTrace();
@@ -88,12 +94,7 @@ public class RegisterRepository {
         final StringBuffer sb = new StringBuffer();
         sb.append("<h2>").append(email).append(",您好！<h2>").append("<p " +
                 "style='color:red'>此次注册的验证码是：").append(code).append("</p>");
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                sendNormalEmail("验证码", true, sb.toString(), true, email);
-            }
-        }).start();
+        new Thread(() -> sendNormalEmail("验证码", true, sb.toString(), true, email)).start();
     }
 
 

@@ -8,17 +8,30 @@ import com.mongodb.lang.NonNull;
  */
 public class RegisterModel {
     @NonNull
-    private String studentNumber;
+    private int phone;
     @NonNull
     private String name;
     @NonNull
     private String email;
+    @NonNull
+    private String number;
+    @NonNull
+    private String major;
 
-    public String getStudentNumber() {
-        return studentNumber;
+    public String getNumber() {
+        return number;
     }
-    public void setStudentNumber(String studentNumber) {
-        this.studentNumber = studentNumber;
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public int getPhone() {
+        return phone;
+    }
+
+    public void setPhone(int phone) {
+        this.phone = phone;
     }
 
     public String getName() {
@@ -34,5 +47,11 @@ public class RegisterModel {
     public void setEmail(String email) {
         this.email = email;
     }
-}
 
+    public String getMajor() {
+        return major;
+    }
+    public void setMajor(String major) {
+        this.major = major;
+    }
+}
