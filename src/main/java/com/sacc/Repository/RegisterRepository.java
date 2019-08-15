@@ -2,6 +2,7 @@ package com.sacc.Repository;
 
 import com.sacc.Model.RegisterModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -30,7 +31,7 @@ public class RegisterRepository {
 
     private Object normalTools;
 
-    public RegisterRepository(Object normalTools) {
+    public RegisterRepository(@Qualifier("jacksonObjectMapper") Object normalTools) {
         NormalTools = normalTools;
     }
 
@@ -39,7 +40,7 @@ public class RegisterRepository {
         return mongo.find(query, RegisterRepository.class);
     }
 
-    public void register(String userName, String number, String email, int phone, String major, String department) {
+    public void register(String userName, String number, String email, Integer phone, String major, String department) {
         Query query = new Query(Criteria.where("userName").is(userName));
         RegisterRepository result = (RegisterRepository) mongo.find(query, RegisterRepository.class);
         if (result != null) {

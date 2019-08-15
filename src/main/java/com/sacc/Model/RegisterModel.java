@@ -8,7 +8,7 @@ import com.mongodb.lang.NonNull;
  */
 public class RegisterModel {
     @NonNull
-    private int phone;
+    private Integer phone;
     @NonNull
     private String name;
     @NonNull
@@ -20,10 +20,11 @@ public class RegisterModel {
     @NonNull
     private String department;
 
+
+
     public String getNumber() {
         return number;
     }
-
     public void setNumber(String number) {
         this.number = number;
     }
@@ -31,7 +32,6 @@ public class RegisterModel {
     public int getPhone() {
         return phone;
     }
-
     public void setPhone(int phone) {
         this.phone = phone;
     }
@@ -60,7 +60,6 @@ public class RegisterModel {
     public String getDepartment() {
         return department;
     }
-
     public void setDepartment(String department) {
         this.department = department;
     }

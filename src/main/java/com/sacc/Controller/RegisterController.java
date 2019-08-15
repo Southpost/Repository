@@ -1,28 +1,37 @@
 package com.sacc.Controller;
 
 import com.mongodb.diagnostics.logging.Logger;
+import com.sacc.Model.RegisterModel;
 import com.sacc.Repository.RegisterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Random;
 
+@RestController
 public class RegisterController {
     @Autowired
     RegisterRepository reg;
 
 
     @PostMapping("/api/register")
-    public String register(String name, String number, String email,int phone,
-                           String major, String department,HttpServletRequest request){
+    public String register(@RequestBody RegisterModel registerModel, HttpServletRequest request){
 
+        Integer phone =registerModel.getPhone();
+        String name =registerModel.getName();
+        String email=registerModel.getEmail();
+        String major=registerModel.getMajor();
+        String number=registerModel.getNumber();
+        String department=registerModel.getDepartment();
         if(!StringUtils.hasText(String.valueOf(phone))||!StringUtils.hasText(name)
-                ||!StringUtils.hasText(email)||StringUtils.hasText(major)
-                ||StringUtils.hasText(number)||StringUtils.hasText(department)) {
+                ||!StringUtils.hasText(email)||!StringUtils.hasText(major)
+                ||!StringUtils.hasText(number)||!StringUtils.hasText(department)) {
             return "请将信息填写完整";
         }
 //       if(reg.hasRegister(name)) {
