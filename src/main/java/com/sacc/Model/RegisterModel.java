@@ -17,6 +17,8 @@ public class RegisterModel {
     private String number;
     @NonNull
     private String major;
+    @NonNull
+    private String department;
 
     public String getNumber() {
         return number;
@@ -53,5 +55,13 @@ public class RegisterModel {
     }
     public void setMajor(String major) {
         this.major = major;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
     }
 }

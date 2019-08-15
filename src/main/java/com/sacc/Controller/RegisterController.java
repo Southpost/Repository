@@ -17,10 +17,12 @@ public class RegisterController {
 
 
     @PostMapping("/api/register")
-    public String register(String name, String number, String email,int phone,String major,HttpServletRequest request){
+    public String register(String name, String number, String email,int phone,
+                           String major, String department,HttpServletRequest request){
 
         if(!StringUtils.hasText(String.valueOf(phone))||!StringUtils.hasText(name)
-                ||!StringUtils.hasText(email)||StringUtils.hasText(major)||StringUtils.hasText(number)) {
+                ||!StringUtils.hasText(email)||StringUtils.hasText(major)
+                ||StringUtils.hasText(number)||StringUtils.hasText(department)) {
             return "请将信息填写完整";
         }
 //       if(reg.hasRegister(name)) {
@@ -30,7 +32,7 @@ public class RegisterController {
             return "不合法邮箱";
         }
 
-        reg.register(number,name,email,phone,major);
+        reg.register(number,name,email,phone,major,department);
         HttpSession httpSession=request.getSession();
         httpSession.setMaxInactiveInterval(60*60);
         return "注册成功";

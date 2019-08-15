@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -38,7 +39,7 @@ public class RegisterRepository {
         return mongo.find(query, RegisterRepository.class);
     }
 
-    public void register(String userName, String number,String email, int phone, String major) {
+    public void register(String userName, String number, String email, int phone, String major, String department) {
         Query query = new Query(Criteria.where("userName").is(userName));
         RegisterRepository result = (RegisterRepository) mongo.find(query, RegisterRepository.class);
         if (result != null) {
@@ -52,6 +53,7 @@ public class RegisterRepository {
             register.setName(userName);
             register.setPhone(phone);
             register.setMajor(major);
+            register.setDepartment(department);
             mongo.insert(register);
         } catch (Exception e) {
             e.printStackTrace();
