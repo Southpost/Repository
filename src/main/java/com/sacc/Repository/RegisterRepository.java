@@ -9,7 +9,6 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -22,7 +21,6 @@ import java.util.regex.Pattern;
  */
 @Component
 public class RegisterRepository {
-    private final Object NormalTools;
     @Autowired
     private MongoTemplate mongo;
     @Autowired
@@ -32,7 +30,6 @@ public class RegisterRepository {
     private Object normalTools;
 
     public RegisterRepository(@Qualifier("jacksonObjectMapper") Object normalTools) {
-        NormalTools = normalTools;
     }
 
     public List<RegisterRepository> hasRegister(String username) {
@@ -42,7 +39,7 @@ public class RegisterRepository {
 
     public void register(String userName, String number, String email, Integer phone, String major, String department) {
         Query query = new Query(Criteria.where("userName").is(userName));
-        RegisterRepository result = (RegisterRepository) mongo.find(query, RegisterRepository.class);
+        RegisterRepository result = mongo.findOne(query, RegisterRepository.class);
         if (result != null) {
             return;
         }
@@ -71,7 +68,7 @@ public class RegisterRepository {
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
             String username = null;
             //设置 谁发送的
-            helper.setFrom(new InternetAddress(username, dName, "UTF-8"));
+            helper.setFrom(new InternetAddress(null, dName, "UTF-8"));
             //发给谁 【接收者的邮箱】
             helper.setTo(email);
             //标题内容

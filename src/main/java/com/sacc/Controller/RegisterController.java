@@ -34,9 +34,9 @@ public class RegisterController {
                 ||!StringUtils.hasText(number)||!StringUtils.hasText(department)) {
             return "请将信息填写完整";
         }
-//       if(reg.hasRegister(name)) {
-//            return "该用户已完成注册";
-//       }
+       if(reg.hasRegister(name)!=null) {
+           return "该用户已经存在！";
+       }
         if(reg.isEmail(email)) {
             return "不合法邮箱";
         }
